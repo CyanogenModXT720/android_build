@@ -203,11 +203,11 @@ class EdifyGenerator(object):
 
   def WriteRawImage(self, partition, fn):
     """Write the given package file into the given MTD partition."""
-    self.script.append(
-        ('assert(package_extract_file("%(fn)s", "/tmp/%(partition)s.img"),\n'
-         '       write_raw_image("/tmp/%(partition)s.img", "%(partition)s"),\n'
-         '       delete("/tmp/%(partition)s.img"));')
-        % {'partition': partition, 'fn': fn})
+    # self.script.append(
+    #     ('assert(package_extract_file("%(fn)s", "/tmp/%(partition)s.img"),\n'
+    #      '       write_raw_image("/tmp/%(partition)s.img", "%(partition)s"),\n'
+    #      '       delete("/tmp/%(partition)s.img"));')
+    #     % {'partition': partition, 'fn': fn})
 
   def SetPermissions(self, fn, uid, gid, mode):
     """Set file ownership and permissions."""
