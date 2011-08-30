@@ -1126,9 +1126,15 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTATOOLS)
 .PHONY: otapackage bacon
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
+
+ifeq ($(TARGET_CUSTOM_RELEASETOOL),)
 	$(hide) \
-		WANT_SQUASHFS=$(WANT_SQUASHFS) \
-		./vendor/cyanogen/tools/squisher
+	WANT_SQUASHFS=$(WANT_SQUASHFS) \
+	./vendor/cyanogen/tools/squisher
+else
+	WANT_SQUASHFS=$(WANT_SQUASHFS) \
+	$(TARGET_CUSTOM_RELEASETOOL)
+endif
 
 endif    # TARGET_DEVICE != generic
 endif    # TARGET_PRODUCT != sdk
