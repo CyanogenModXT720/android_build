@@ -1120,7 +1120,6 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTATOOLS)
            --no_recovery=$(no_recovery) \
            --no_kernel=$(no_kernel) \
 	   --override_device=$(override_device) \
-	   $(TARGET_OTA_EXTRA_ARGS) \
            $(BUILT_TARGET_FILES_PACKAGE) $@
 
 .PHONY: otapackage bacon
