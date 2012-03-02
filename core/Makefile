@@ -720,7 +720,18 @@ define build-systemimage-target
     $(hide) $(MKYAFFS2) -f $(mkyaffs2_extra_flags) $(TARGET_OUT) $(1)
 endef
 
+ifdef TARGET_CUSTOM_SYSTEMIMAGE_TWEAKER
+define tweak-systemimage-files
+    @echo "Tweaking system image: $(1)"
+    $(hide) $(TARGET_CUSTOM_SYSTEMIMAGE_TWEAKER) $(TARGET_OUT)
+endef
+else
+define tweak-systemimage-files
+endef
+endif # TARGET_CUSTOM_SYSTEMIMAGE_TWEAKER
+
 $(BUILT_SYSTEMIMAGE_UNOPT): $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_MKUSERFS)
+	$(call tweak-systemimage-files,$@)
 	$(call build-systemimage-target,$@)
 	$(call build-ext2-systemimage-target,$@)
 
